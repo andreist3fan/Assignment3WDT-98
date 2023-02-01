@@ -37,7 +37,7 @@ exports.create = (req, res) => {
 
   const user = new User(first_name, last_name, email, phone, comments);
   user.save((rows)=>{
-    res.render('home', { alert: 'User added successfully.' });
+    res.render('add-user', { alert: 'User added successfully.' });
   });
 }
 
@@ -64,7 +64,7 @@ exports.update = (req, res) => {
 
 // Delete User
 exports.delete = (req, res) => {
-
+  let uID = req.params.id;
   // Delete a record
   User.delete(uID,(removedUser) =>{
     res.redirect('/?removed=' + removedUser);
