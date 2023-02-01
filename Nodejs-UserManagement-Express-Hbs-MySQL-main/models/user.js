@@ -32,6 +32,16 @@ class User {
 
   }
 
+  static viewAll(uID,render){
+    connection.query('SELECT * FROM user WHERE id = ?', [uID], (err, rows) => {
+      if (!err) {
+        render(rows);
+      } else {
+        console.log(err);
+      }
+      console.log('The data from user table: \n', rows);
+    });
+  }
   save(render){
     connection.query('INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?', 
     [this.first_name, this.last_name, this.email, this.phone, this.comments], 

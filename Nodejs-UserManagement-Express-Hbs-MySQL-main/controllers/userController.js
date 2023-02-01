@@ -113,13 +113,9 @@ exports.delete = (req, res) => {
 exports.viewall = (req, res) => {
 
   // User the connection
-  connection.query('SELECT * FROM user WHERE id = ?', [req.params.id], (err, rows) => {
-    if (!err) {
-      res.render('view-user', { rows });
-    } else {
-      console.log(err);
-    }
-    console.log('The data from user table: \n', rows);
-  });
+  let uID = req.params.id;
+  User.viewAll(uID,(rows)=>{
+    res.render('view-user', { rows });
+  })
 
 }
