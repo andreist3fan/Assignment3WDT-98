@@ -54,15 +54,18 @@ exports.edit = (req, res) => {
 exports.update = (req, res) => {
   const { first_name, last_name, email, phone, comments } = req.body;
   // User the connection
+  const tempUser = new User(first_name, last_name, email, phone, comments);
+  let uID = req.params.id;
+  tempUser.update(uID, (rows)=>{
+    res.render('edit-user', { rows, alert: `${first_name} has been updated.` });  
+  })
   
-  res.render('edit-user', { rows, alert: `${first_name} has been updated.` });
 }
 
 // Delete User
 exports.delete = (req, res) => {
 
   // Delete a record
-  let uID = req.params.id;
   User.delete(uID,(removedUser) =>{
     res.redirect('/?removed=' + removedUser);
   });

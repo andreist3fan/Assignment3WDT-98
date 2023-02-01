@@ -45,27 +45,27 @@ class User {
     });
   }
 
-  update(render){
+  update(uID, render){
     connection.query('UPDATE user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ? WHERE id = ?', 
-  [first_name, last_name, email, phone, comments, req.params.id], 
-  (err, rows) => {
-    if (!err) {
-      // User the connection
-      connection.query('SELECT * FROM user WHERE id = ?', [req.params.id], (err, rows) => {
-        // When done with the connection, release it
-        
-        if (!err) {
-          res.render('edit-user', { rows, alert: `${first_name} has been updated.` });
-        } else {
-          console.log(err);
-        }
-        console.log('The data from user table: \n', rows);
-      });
-    } else {
-      console.log(err);
-    }
-    console.log('The data from user table: \n', rows);
-  });
+    [this.first_name, this.last_name, this.email, this.phone, this.comments, uID], 
+    (err, rows) => {
+      if (!err) {
+        // User the connection
+        connection.query('SELECT * FROM user WHERE id = ?', 
+        [uID], (err, rows) => {
+          // When done with the connection, release it
+          if (!err) {
+            render(rows);
+          } else {
+            console.log(err);
+          }
+          console.log('The data from user table: \n', rows);
+        });
+      } else {
+        console.log(err);
+      }
+      console.log('The data from user table: \n', rows);
+    });
   }
 
   static search(searchTerm, render){
