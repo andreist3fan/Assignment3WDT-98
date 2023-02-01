@@ -22,7 +22,7 @@ exports.view = (req, res) => {
 exports.find = (req, res) => {
   let searchTerm = req.body.search;
   User.search(searchTerm, (rows)=>{
-      res.render('home', {rows, removedUser:''});
+      res.render('home', {rows, remUser:''});
   });
 }
 
@@ -103,5 +103,5 @@ exports.viewall = (req, res) => {
   User.viewAll(uID,(rows)=>{
     res.render('view-user', { rows });
   })
-
+  //TODO: exports.activateUser = (req,res)=>{}
 }

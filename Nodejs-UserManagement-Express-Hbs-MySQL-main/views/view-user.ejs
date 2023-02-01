@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Management System</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
-
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -34,60 +32,54 @@
       </div>
     </div>
   </nav>
-
-  <div class="container pt-5 pb-5">
-    <% if (remUser){ %> 
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          User has been removed.
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <% } %> 
-        <div class="row">
-          <div class="col-6">
-            <h1>Users</h1>
-          </div>
-          <div class="col-6 d-flex justify-content-end">
-            <a href="/adduser" type="button" class="btn btn-primary align-self-center">+ add user</a>
-          </div>
-        </div>
-        
-        <table class="table table-bordered">
-          <thead class="thead-dark">
+   
+    
+    <div class="container pt-5 pb-5">
+      
+<div class="view-user p-5">
+    <% for(let user of rows){%>
+    <div class="row mb-5">
+      <div class="col text-center">
+        <h3><%=user.first_name%></h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <table class="table">
+          <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">First Name</th>
               <th scope="col">Last Name</th>
               <th scope="col">Email</th>
               <th scope="col">Phone</th>
-              <th scope="col" class="text-end">Action</th>
             </tr>
           </thead>
           <tbody>
-        
-            <% for(let user of rows){%>
             <tr>
-              <th scope="row"><%=user.id%></th>
-              <td><%=user.first_name%></td>
+              <th scope="row"><%=user.first_name%></th>
               <td><%=user.last_name%></td>
               <td><%=user.email%></td>
               <td><%=user.phone%></td>
-              <td class="text-end">
-                <a href="/viewuser/<%=user.id%>" type="button" class="btn btn-light btn-small"><i class="bi bi-check"></i> Activate</a>
-                <a href="/viewuser/<%=user.id%>" type="button" class="btn btn-light btn-small"><i class="bi bi-eye"></i> View</a>
-                <a href="/edituser/<%=user.id%>" type="button" class="btn btn-light btn-small"><i class="bi bi-pencil"></i>
-                  Edit</a>
-                <a href="/<%=user.id%>" type="button" class="btn btn-light btn-small"><i class="bi bi-person-x"></i> Delete</a>
-              </td>
             </tr>
-            <%}%>
-        
           </tbody>
         </table>
+      </div>
+      <div class="row">
+        <div class="col">
+          <b>Comments</b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%=user.comments%>
+        </div>
+      </div>
+    </div>
+    <% } %> 
   </div>
-
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
     crossorigin="anonymous"></script>
 </body>
-
 </html>
