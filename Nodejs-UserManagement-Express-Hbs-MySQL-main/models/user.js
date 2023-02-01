@@ -44,6 +44,17 @@ class User {
         console.log("The data from user table: \n", rows);
     });
   }
+
+  static edit(uID, render){
+    connection.query('SELECT * FROM user WHERE id = ?', [uID], (err, rows) => {
+      if (!err) {
+        render(rows);
+      } else {
+        console.log(err);
+      }
+      console.log('The data from user table: \n', rows);
+    });
+  }
 }
 
 module.exports = User;
