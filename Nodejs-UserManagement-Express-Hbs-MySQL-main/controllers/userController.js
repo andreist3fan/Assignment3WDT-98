@@ -37,7 +37,7 @@ exports.create = (req, res) => {
 
   const user = new User(first_name, last_name, email, phone, comments);
   user.save((rows)=>{
-    res.render('add-user', { alert: 'User added successfully.' });
+    res.render('home', { alert: 'User added successfully.' });
   });
 }
 
