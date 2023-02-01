@@ -46,7 +46,7 @@ exports.create = (req, res) => {
 exports.edit = (req, res) => {
   // User the connection
   let uID = req.params.id;
-  User.edit(uID,(rows)=>{res.render('edit-user',{rows})});
+  User.edit(uID,(rows)=>{res.render('edit-user',{rows, alert:""})});
 }
 
 

@@ -9,7 +9,7 @@
 <body>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
           <li class="breadcrumb-item active" aria-current="page">Edit User</li>
         </ol>
       </nav>
@@ -21,8 +21,8 @@
       <%}%>
       
       <% for(let user of rows){%>
-      <form class="row g-3 needs-validation" method="POST" action="/edituser/{{this.id}}" novalidate> 
-        <% include ./partials/user-form, {user: user}%>
+      <form class="row g-3 needs-validation" method="POST" action="/edituser/<%=user.id%>" novalidate> 
+        <%- include( "partials/user-form", {user: user});%>
       </form>
       <%}%>
 </body>
