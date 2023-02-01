@@ -19,7 +19,7 @@ class User {
 
   save(render){
     connection.query('INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?', 
-    [first_name, last_name, email, phone, comments], 
+    [this.first_name, this.last_name, this.email, this.phone, this.comments], 
     (err, rows) => {
       if (!err) {
         render(rows);

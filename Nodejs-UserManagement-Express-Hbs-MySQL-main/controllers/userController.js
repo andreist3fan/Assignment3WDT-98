@@ -27,8 +27,8 @@ exports.view = (req, res) => {
 // Find User by Search
 exports.find = (req, res) => {
   let searchTerm = req.body.search;
-  user.search(searchTerm, (rows)=>{
-      res.render();
+  User.search(searchTerm, (rows)=>{
+      res.render('home');
   });
 }
 
