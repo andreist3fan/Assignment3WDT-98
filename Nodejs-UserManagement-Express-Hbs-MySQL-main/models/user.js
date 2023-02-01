@@ -55,6 +55,10 @@ class User {
     });
   }
 
+  update(render){
+    
+  }
+
   static search(searchTerm, render){
     connection.query(
       "SELECT * FROM user WHERE first_name LIKE ? OR last_name LIKE ?", 
