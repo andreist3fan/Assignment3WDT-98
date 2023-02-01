@@ -14,7 +14,7 @@ class User {
     this.last_name = last_name;
     this.email = email;
     this.phone = phone;
-    this.comments = comments;
+    this.comments = comments;// auie mndrei
   }
   save(){
     
