@@ -16,36 +16,34 @@ class User {
     this.phone = phone;
     this.comments = comments;
   }
-  save(){
-    
-  }
-  // save() {
-  //   const db = getDb();
-  //   return db
-  //     .collection('BOOKS')
-  //     .insertOne(this)
-  //     .then(result => {
-  //       console.log(result);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
 
-  // static fetchAll() {
-  //   const db = getDb();
-  //   return db
-  //     .collection('BOOKS')
-  //     .find()
-  //     .toArray()
-  //     .then(books => {
-  //       console.log(books);
-  //       return books;
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
+  save(render){
+    connection.query('INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?', 
+    [first_name, last_name, email, phone, comments], 
+    (err, rows) => {
+      if (!err) {
+        render(rows);
+      } else {
+        console.log(err);
+      }
+      console.log('The data from user table: \n', rows);
+    });
+  }
+
+  static search(searchTerm, render){
+    connection.query(
+      "SELECT * FROM user WHERE first_name LIKE ? OR last_name LIKE ?", 
+      ['%' + searchTerm + '%', '%' + searchTerm + '%'], 
+      (err, rows) => {
+        if (!err) { 
+          render(rows);
+        }
+        else {
+          console.log(err);
+        }
+        console.log("The data from user table: \n", rows);
+    });
+  }
 }
 
 module.exports = User;

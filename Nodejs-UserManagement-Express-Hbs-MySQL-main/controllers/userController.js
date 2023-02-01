@@ -27,14 +27,8 @@ exports.view = (req, res) => {
 // Find User by Search
 exports.find = (req, res) => {
   let searchTerm = req.body.search;
-  // User the connection
-  connection.query('SELECT * FROM user WHERE first_name LIKE ? OR last_name LIKE ?', ['%' + searchTerm + '%', '%' + searchTerm + '%'], (err, rows) => {
-    if (!err) {
-      res.render('home', { rows });
-    } else {
-      console.log(err);
-    }
-    console.log('The data from user table: \n', rows);
+  user.search(searchTerm, (rows)=>{
+      res.render();
   });
 }
 
@@ -48,15 +42,8 @@ exports.create = (req, res) => {
   let searchTerm = req.body.search;
 
   const user = new User(first_name, last_name, email, phone, comments);
-  user.save();
-  // User the connection
-  connection.query('INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?', [first_name, last_name, email, phone, comments], (err, rows) => {
-    if (!err) {
-      res.render('add-user', { alert: 'User added successfully.' });
-    } else {
-      console.log(err);
-    }
-    console.log('The data from user table: \n', rows);
+  user.save((rows)=>{
+    res.render('add-user', { alert: 'User added successfully.' });
   });
 }
 
