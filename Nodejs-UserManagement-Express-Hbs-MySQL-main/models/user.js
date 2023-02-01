@@ -55,6 +55,21 @@ class User {
       console.log('The data from user table: \n', rows);
     });
   }
+
+  static delete(uID,redirect){
+    
+    // Hide record
+
+    connection.query('UPDATE user SET status = ? WHERE id = ?', ['removed', uID], (err, rows) => {
+      if (!err) {
+        let removedUser = encodeURIComponent('User successeflly removed.');
+        redirect(removedUser);
+      } else {
+        console.log(err);
+      }
+      console.log('The data from beer table are: \n', rows);
+    }); 
+  }
 }
 
 module.exports = User;
