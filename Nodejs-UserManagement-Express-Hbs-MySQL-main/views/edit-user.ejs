@@ -20,10 +20,10 @@
         </div>
       <%}%>
       
-      {{#each rows}}
+      <% for(let user of rows){%>
       <form class="row g-3 needs-validation" method="POST" action="/edituser/{{this.id}}" novalidate> 
-        {{> user-form}}
+        <% include ./partials/user-form, {user: user}%>
       </form>
-      {{/each}}
+      <%}%>
 </body>
 </html>
