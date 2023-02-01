@@ -17,6 +17,21 @@ class User {
     this.comments = comments;
   }
 
+  static view(removedUser, render){
+    // User the connection
+    connection.query('SELECT * FROM user WHERE status = "active"', 
+    (err, rows) => {
+    // When done with the connection, release it
+    if (!err) {
+      render(rows, removedUser);
+    } else {
+      console.log(err);
+    }
+    console.log('The data from user table: \n', rows);
+    });
+
+  }
+
   save(render){
     connection.query('INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?', 
     [this.first_name, this.last_name, this.email, this.phone, this.comments], 
