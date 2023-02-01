@@ -12,8 +12,8 @@ let connection = mysql.createConnection({
 // View Users
 exports.view = (req, res) => {
   let remUser = req.query.removed;
-  User.view(remUser, (rows, removedUser) =>{
-    res.render('home', {rows, removedUser});
+  User.view((rows) =>{
+    res.render('home', {rows, remUser});
   }
   );
 }
@@ -22,7 +22,7 @@ exports.view = (req, res) => {
 exports.find = (req, res) => {
   let searchTerm = req.body.search;
   User.search(searchTerm, (rows)=>{
-      res.render('home', {rows});
+      res.render('home', {rows, removedUser:''});
   });
 }
 
