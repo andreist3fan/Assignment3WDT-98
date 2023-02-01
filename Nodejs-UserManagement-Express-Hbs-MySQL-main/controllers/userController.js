@@ -54,8 +54,9 @@ exports.edit = (req, res) => {
 exports.update = (req, res) => {
   const { first_name, last_name, email, phone, comments } = req.body;
   // User the connection
-  connection.query('UPDATE user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ? WHERE id = ?', [first_name, last_name, email, phone, comments, req.params.id], (err, rows) => {
-
+  connection.query('UPDATE user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ? WHERE id = ?', 
+  [first_name, last_name, email, phone, comments, req.params.id], 
+  (err, rows) => {
     if (!err) {
       // User the connection
       connection.query('SELECT * FROM user WHERE id = ?', [req.params.id], (err, rows) => {
