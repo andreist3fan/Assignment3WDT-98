@@ -103,5 +103,19 @@ exports.viewall = (req, res) => {
   User.viewAll(uID,(rows)=>{
     res.render('view-user', { rows });
   })
+
   //TODO: exports.activateUser = (req,res)=>{}
+  exports.activateUser = (req, res) =>{
+    let uID = req.params.id;
+    User.activate(uID, (activatedUser)=>{
+      res.redirect('/?activated=' + activatedUser);
+    });
+  }
+
+  exports.deactivateUser = (req, res) =>{
+    let uID = req.params.id;
+    User.activate(uID, (deactivatedUser)=>{
+      res.redirect('/?deactivated=' + deactivatedUser);
+    });
+  }
 }

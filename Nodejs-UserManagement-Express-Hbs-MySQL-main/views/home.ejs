@@ -65,14 +65,19 @@
           <tbody>
         
             <% for(let user of rows){%>
-            <tr>
+            <% if(user.status == 'active'){%>
+              <tr style="background-color:  green;">
+            <% } else { %>
+              <tr style="background-color: whitesmoke;">
+            <% } %>
               <th scope="row"><%=user.id%></th>
               <td><%=user.first_name%></td>
               <td><%=user.last_name%></td>
               <td><%=user.email%></td>
               <td><%=user.phone%></td>
               <td class="text-end">
-                <a href="/viewuser/<%=user.id%>" type="button" class="btn btn-light btn-small"><i class="bi bi-check"></i> Activate</a>
+                <a href="/<%= (user.status != 'active')? 'deactivateuser' : 'activateuser' %>/<%=user.id%>" type="button" class="btn btn-light btn-small"><i class="bi bi-check"></i> 
+                  <%= (user.status != 'active') ? 'Deactivate' : 'Activate' %></a>
                 <a href="/viewuser/<%=user.id%>" type="button" class="btn btn-light btn-small"><i class="bi bi-eye"></i> View</a>
                 <a href="/edituser/<%=user.id%>" type="button" class="btn btn-light btn-small"><i class="bi bi-pencil"></i>
                   Edit</a>
@@ -80,7 +85,7 @@
               </td>
             </tr>
             <%}%>
-        
+            
           </tbody>
         </table>
   </div>
