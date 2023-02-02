@@ -27,13 +27,13 @@ exports.find = (req, res) => {
 }
 
 exports.form = (req, res) => {
-  res.render('add-user');
+  res.render('add-user',{alert:''});
 }
 
 // Add new user
 exports.create = (req, res) => {
   const { first_name, last_name, email, phone, comments } = req.body;
-  //let searchTerm = req.body.search;
+  let searchTerm = req.body.search;
 
   const user = new User(first_name, last_name, email, phone, comments);
   user.save((rows)=>{
@@ -103,19 +103,19 @@ exports.viewall = (req, res) => {
   User.viewAll(uID,(rows)=>{
     res.render('view-user', { rows });
   })
+}
 
-  //TODO: exports.activateUser = (req,res)=>{}
-  exports.activateUser = (req, res) =>{
-    let uID = req.params.id;
-    User.activate(uID, (activatedUser)=>{
-      res.redirect('/?activated=' + activatedUser);
-    });
-  }
+//TODO: exports.activateUser = (req,res)=>{}
+exports.activateUser = (req, res) =>{
+  let uID = req.params.id;
+  User.activate(uID, (activatedUser)=>{
+    res.redirect('/?activated=' + activatedUser);
+  });
+}
 
-  exports.deactivateUser = (req, res) =>{
-    let uID = req.params.id;
-    User.activate(uID, (deactivatedUser)=>{
-      res.redirect('/?deactivated=' + deactivatedUser);
-    });
-  }
+exports.deactivateUser = (req, res) =>{
+  let uID = req.params.id;
+  User.deactivate(uID, (deactivatedUser)=>{
+    res.redirect('/?deactivated=' + deactivatedUser);
+  });
 }

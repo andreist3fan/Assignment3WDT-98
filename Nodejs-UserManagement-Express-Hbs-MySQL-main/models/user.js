@@ -19,8 +19,8 @@ class User {
   }
 
   save(render){
-    connection.query('INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?', 
-    [this.first_name, this.last_name, this.email, this.phone, this.comments], 
+    connection.query('INSERT INTO user SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?, status = ?', 
+    [this.first_name, this.last_name, this.email, this.phone, this.comments, this.status], 
     (err, rows) => {
       if (!err) {
         render(rows);
@@ -111,7 +111,7 @@ class User {
     ['removed', uID], 
     (err, rows) => {
       if (!err) {
-        let removedUser = encodeURIComponent('User successeflly removed.');
+        let removedUser = encodeURIComponent('User successfully removed.');
         redirect(removedUser);
       } else {
         console.log(err);
@@ -125,7 +125,7 @@ class User {
     ['active', uID],
     (err, rows) => {
       if (!err) {
-        let activatedUser = encodeURIComponent('User successeflly activated.');
+        let activatedUser = encodeURIComponent('User successfully activated.');
         redirect(activatedUser);
       } else {
         console.log(err);
@@ -139,7 +139,7 @@ class User {
     ['none', uID], 
     (err, rows) => {
       if (!err) {
-        let deactivatedUser = encodeURIComponent('User successeflly deactivated.');
+        let deactivatedUser = encodeURIComponent('User successfully deactivated.');
         redirect(deactivatedUser);
       } else {
         console.log(err);
