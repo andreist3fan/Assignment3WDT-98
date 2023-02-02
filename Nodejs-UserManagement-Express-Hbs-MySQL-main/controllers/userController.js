@@ -33,7 +33,7 @@ exports.form = (req, res) => {
 // Add new user
 exports.create = (req, res) => {
   const { first_name, last_name, email, phone, comments } = req.body;
-  let searchTerm = req.body.search;
+  //let searchTerm = req.body.search;
 
   const user = new User(first_name, last_name, email, phone, comments);
   user.save((rows)=>{
